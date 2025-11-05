@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+
+:root{
+    --bg-light-grey: rgb(245, 245, 245); 
+}
+
+* {
+  font-family: "Geist";
+  box-sizing: border-box;
+}
+
+main{
+    width: 100vw;
+    height: 100vh;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+
+input:focus{
+    outline:none
+}
+
+.section{
+    margin: 1rem 0;
+}
+
+.form-card {
+ border: 1px solid gray;
+ width: 300px;
+}
+
+.form-flex{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-card-heading{
+    text-align: center;
+}
+
+.form-card-body{
+    padding: 0rem 1rem;
+}
+
+.err-msg{
+    color: red;
+}
+
+.list-card{
+    height: 500px;
+    border-radius: 0;
+}
+
+.record-card{
+    background-color: rgb(243, 243, 243);
+}
