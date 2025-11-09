@@ -28,11 +28,11 @@ export default function AddNewAgent() {
       setError("");
       setName("");
       setEmail("");
-      navigate("/salesAgents");
-      setLoading(false);
+      navigate("/agents");
     } catch (err) {
-      setLoading(false);
       setError(err.response.data.error);
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -40,16 +40,16 @@ export default function AddNewAgent() {
       <main>
         <div className="container d-flex justify-content-center align-items-center">
           {loading ? (
-            <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Loading...</span>
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
           ) : (
             <div className="form-card form-flex ">
               <form className="form-card-body" onSubmit={createAgentHandler}>
-                <div class="section form-card-heading">
+                <div className="section form-card-heading">
                   <h1>New Sales Agent</h1>
                 </div>
-                <div class="section form-flex">
+                <div className="section form-flex">
                   <label htmlFor="input-name">Name*</label>
                   <input
                     type="text"
@@ -59,7 +59,7 @@ export default function AddNewAgent() {
                     required
                   />
                 </div>
-                <div class="section form-flex">
+                <div className="section form-flex">
                   <label htmlFor="input-email">Email*</label>
                   <input
                     type="email"

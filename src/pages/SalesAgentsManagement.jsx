@@ -43,7 +43,7 @@ export default function SalesAgentsManagement() {
             )}
           </div>
           <div className="section form-flex pb-3">
-            <Link to="/" className="btn btn-outline-dark">
+            <Link to="/agents/new" className="btn btn-outline-dark">
               + Add New Sales Agent
             </Link>
           </div>
