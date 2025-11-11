@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext } from "react";
 import useFetch from "../hooks/useFetch";
 
 const SalesAgentContext = createContext();
@@ -16,7 +16,7 @@ export function SalesAgentProvider({ children }) {
         value={{
           salesAgents: data || [],
           salesAgentsLoading: loading,
-          saleAgentsErr: error,
+          salesAgentsErr: error,
         }}
       >
         {children}

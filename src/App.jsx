@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
 // PAGES
+import Dashboard from "./pages/Dashboard";
 import AddNewLead from "./pages/AddNewLead";
 import LeadsList from "./pages/LeadsList";
 import LeadManagement from "./pages/LeadManagement";
@@ -27,6 +28,7 @@ export default function App() {
               theme="colored"
             />
             <Routes>
+              <Route path="/" Component={Dashboard} />
               <Route path="/agents" Component={SalesAgentsManagement} />
               <Route path="/agents/new" Component={AddNewAgent} />
               <Route path="/leads" Component={LeadsList} />

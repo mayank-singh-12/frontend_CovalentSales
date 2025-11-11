@@ -7,7 +7,7 @@ import Select from "react-select";
 import useSalesAgent from "../contexts/SalesAgentsContext";
 
 export default function AddNewLead() {
-  const { salesAgents, salesAgentsLoading, saleAgentsErr } = useSalesAgent();
+  const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
 
   // fetching tags from TAGS API
   const { data, loading, error } = useFetch("http://localhost:8080/tags");
@@ -15,7 +15,7 @@ export default function AddNewLead() {
   const navigate = useNavigate();
 
   const tagOptions = data
-    ? data.map((tag) => ({ value: tag.name, label: tag.name   }))
+    ? data.map((tag) => ({ value: tag.name, label: tag.name }))
     : [];
 
   const [name, setName] = useState("");
@@ -131,7 +131,7 @@ export default function AddNewLead() {
                 </select>
               </>
             ) : (
-              saleAgentsErr && <span> {saleAgentsErr}</span>
+              salesAgentsErr && <span> {salesAgentsErr}</span>
             )}
           </div>
           <br />
