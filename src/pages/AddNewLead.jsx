@@ -10,7 +10,7 @@ export default function AddNewLead() {
   const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
 
   // fetching tags from TAGS API
-  const { data, loading, error } = useFetch("http://localhost:8080/tags");
+  const { data, loading, error } = useFetch("https://backend-covalent-sales.vercel.app/tags");
 
   const navigate = useNavigate();
 

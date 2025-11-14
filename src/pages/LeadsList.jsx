@@ -69,8 +69,8 @@ export default function LeadsList() {
         )}
 
         <hr />
-        {/* filters */}
 
+        {/* filters */}
         <h3>Filters</h3>
 
         {/* filter by status */}

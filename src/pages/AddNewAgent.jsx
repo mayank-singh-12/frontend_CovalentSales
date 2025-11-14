@@ -21,7 +21,7 @@ export default function AddNewAgent() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:8080/agents",
+        "https://backend-covalent-sales.vercel.app/agents",
         newAgentObj
       );
       toast.success(response.data.message);

@@ -1,5 +1,6 @@
 import useLeads from "../contexts/LeadsContext";
 import { Link } from "react-router-dom";
+
 export default function Dashboard() {
   const { leads, leadsLoading, leadsErr, setStatusFilter } = useLeads();
 
@@ -44,7 +45,9 @@ export default function Dashboard() {
           Object.keys(leadsByStatus).map((status) => (
             <div key={status}>
               <strong>{status}</strong> :{" "}
-              <Link to="/">
+              <Link
+                to={{ pathname: `/leads/status`, search: `status=${status}` }}
+              >
                 {leadsByStatus[status].length}{" "}
                 {leadsByStatus[status].length !== 1 ? "Leads" : "Lead"}
               </Link>

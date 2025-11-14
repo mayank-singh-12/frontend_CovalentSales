@@ -11,7 +11,7 @@ export default function useFetch(url, params) {
       try {
         setData(null);
         setLoading(true);
-        const response = await axios.get(url, params && { params: params });
+        const response = await axios.get(url, { params: params });
         setLoading(false);
         setError(null);
         setData(response.data);
