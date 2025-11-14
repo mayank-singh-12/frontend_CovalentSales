@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import useSalesAgent from "../contexts/SalesAgentsContext";
 
 export default function SalesAgentsManagement() {
-  const { data, loading, error } = useFetch("http://localhost:8080/agents");
+  const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
 
   return (
     <>
@@ -12,7 +13,7 @@ export default function SalesAgentsManagement() {
           <hr />
           <div className="section">
             <h2>Sales Agent List</h2>
-            {loading ? (
+            {salesAgentsLoading ? (
               <div className="card list-card bg-tertiary d-flex justify-content-center align-items-center">
                 <div className="spinner-border text-primary" role="status">
                   <span className="visually-hidden">Loading...</span>
@@ -21,10 +22,10 @@ export default function SalesAgentsManagement() {
             ) : (
               <div className="card list-card bg-tertiary">
                 <div className="card-body overflow-auto">
-                  {data
-                    ? data.length > 0 && (
+                  {salesAgents
+                    ? salesAgents.length > 0 && (
                         <>
-                          {[...data].reverse().map((agent) => (
+                          {[...salesAgents].reverse().map((agent) => (
                             <div
                               className="card record-card mb-2"
                               key={agent._id}
@@ -37,7 +38,7 @@ export default function SalesAgentsManagement() {
                           ))}
                         </>
                       )
-                    : error && <p>{error}</p>}
+                    : salesAgentsErr && <p>{salesAgentsErr}</p>}
                 </div>
               </div>
             )}

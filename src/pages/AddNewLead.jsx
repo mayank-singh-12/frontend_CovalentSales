@@ -7,12 +7,14 @@ import Select from "react-select";
 import useSalesAgent from "../contexts/SalesAgentsContext";
 
 export default function AddNewLead() {
+  const navigate = useNavigate();
+
   const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
 
   // fetching tags from TAGS API
-  const { data, loading, error } = useFetch("https://backend-covalent-sales.vercel.app/tags");
-
-  const navigate = useNavigate();
+  const { data, loading, error } = useFetch(
+    "https://backend-covalent-sales.vercel.app/tags"
+  );
 
   const tagOptions = data
     ? data.map((tag) => ({ value: tag.name, label: tag.name }))
