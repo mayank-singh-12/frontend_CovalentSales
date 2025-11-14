@@ -33,6 +33,7 @@ export default function LeadsByStatus() {
   return (
     <>
       <main className="container">
+        <Link to="/">Back to Dashboard</Link>
         <h1>Leads By Status</h1>
         <hr />
         <h3>Lead List by Status</h3>

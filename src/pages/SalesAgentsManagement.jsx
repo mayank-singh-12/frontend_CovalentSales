@@ -9,6 +9,7 @@ export default function SalesAgentsManagement() {
     <>
       <main>
         <div className="container">
+          <Link to="/">Back to Dashboard</Link>
           <h1 className="text-center pt-3 m-0">Sales Agent Management</h1>
           <hr />
           <div className="section">

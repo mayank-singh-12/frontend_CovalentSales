@@ -2,9 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useSalesAgent from "../contexts/SalesAgentsContext";
 
 export default function AddNewAgent() {
   const navigate = useNavigate();
+
+  // const { setSalesAgents, setSalesAgentsLoading, setSalesAgentsErr } =
+  //   useSalesAgent();
+
+  const { fetchAgents } = useSalesAgent();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,8 +34,18 @@ export default function AddNewAgent() {
       setError("");
       setName("");
       setEmail("");
+
+      // const { data, loading, error } = useFetch(
+      //   "https://backend-covalent-sales.vercel.app/agents"
+      // );
+      // if (data) setSalesAgents(data);
+      // if (loading) setSalesAgentsLoading(loading);
+      // if (error) setSalesAgentsErr(error);
+
+      fetchAgents();
       navigate("/agents");
     } catch (err) {
+      console.log(err);
       setError(err.response.data.error);
     } finally {
       setLoading(false);
