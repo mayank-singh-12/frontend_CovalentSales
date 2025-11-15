@@ -1,8 +1,12 @@
 import { useState } from "react";
-import useLeads from "../contexts/LeadsContext";
-import useSalesAgent from "../contexts/SalesAgentsContext";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+
+// context
+import useLeads from "../contexts/LeadsContext";
+import useSalesAgent from "../contexts/SalesAgentsContext";
+
+import SalesAgentFilter from "../components/SalesAgentFilter";
 
 export default function LeadsByStatus() {
   const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
@@ -15,7 +19,7 @@ export default function LeadsByStatus() {
   } = useLeads();
 
   const [searchParams, setSearchParams] = useSearchParams();
- 
+
   const [leadsSort, setLeadsSort] = useState("");
 
   const status = searchParams.get("status");
@@ -50,31 +54,7 @@ export default function LeadsByStatus() {
         <hr />
         {/* filters */}
         <h3>Filters</h3>
-        <div>
-          <label htmlFor="agent-filter">Sales Agent:</label>
-
-          {salesAgentsLoading ? (
-            <span>Loading...</span>
-          ) : salesAgents && salesAgents.length > 0 ? (
-            <>
-              <select
-                name="agent-filter"
-                id="agent-filter"
-                onChange={(e) => setSalesAgentFilter(e.target.value)}
-                required
-              >
-                <option value="">None</option>
-                {salesAgents.map((agent) => (
-                  <option value={agent._id} key={agent._id}>
-                    {agent.name} - {agent.email}
-                  </option>
-                ))}
-              </select>
-            </>
-          ) : (
-            salesAgentsErr && <span> {salesAgentsErr}</span>
-          )}
-        </div>
+        <SalesAgentFilter />
         <hr />
         <h3>Sort by</h3>
         <label htmlFor="">Time to Close:</label>
