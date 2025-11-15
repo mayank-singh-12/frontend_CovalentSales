@@ -4,43 +4,53 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function LeadsList() {
-  // importing variables and functions from context
+  // reading from leads context
   const {
     leads,
     leadsLoading,
     leadsErr,
     setStatusFilter,
     setSalesAgentFilter,
+    statusFilter,
+    salesAgentFilter,
   } = useLeads();
 
+  // reading from sales agents context
   const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
 
-  const [leadsSort, setLeadsSort] = useState("");
+  const [timeToCloseSort, setTimeToCloseSort] = useState("");
+  const [prioritySort, setPrioritySort] = useState("");
 
-  let sortedLeads = leads;
-
-  // sorting by time to close
-  if (leadsSort === "timeToCloseLTH") {
-    sortedLeads = leads.toSorted((a, b) => a.timeToClose - b.timeToClose);
-  }
-  if (leadsSort === "timeToCloseHTL") {
-    sortedLeads = sortedLeads.toSorted((a, b) => b.timeToClose - a.timeToClose);
-  }
-
-  // sorting by priority
   const priorityArr = ["Low", "Medium", "High"];
-  if (leadsSort === "priorityLTH") {
-    sortedLeads = sortedLeads.toSorted(
-      (a, b) =>
-        priorityArr.indexOf(a.priority) - priorityArr.indexOf(b.priority)
-    );
+
+  // index of obj signifies presidence of sort field.
+  const sortConfig = [];
+  if (prioritySort !== "") {
+    sortConfig.push({ key: "priority", direction: prioritySort });
   }
-  if (leadsSort === "priorityHTL") {
-    sortedLeads = sortedLeads.toSorted(
-      (a, b) =>
-        priorityArr.indexOf(b.priority) - priorityArr.indexOf(a.priority)
-    );
+  if (timeToCloseSort !== "") {
+    sortConfig.push({ key: "timeToClose", direction: timeToCloseSort });
   }
+
+  function multiSort(arr, sortConfig) {
+    return arr.toSorted((a, b) => {
+      for (const { key, direction } of sortConfig) {
+        const order = direction === "asc" ? 1 : -1;
+        if (a[key] !== b[key]) {
+          if (key === "priority") {
+            return (
+              order *
+              (priorityArr.indexOf(a[key]) - priorityArr.indexOf(b[key]))
+            );
+          }
+          return order * (a[key] - b[key]);
+        }
+      }
+      return 0;
+    });
+  }
+
+  let sortedLeads = multiSort(leads, sortConfig);
 
   return (
     <>
@@ -79,6 +89,7 @@ export default function LeadsList() {
           <select
             name="statusFilter"
             id="statusFilter"
+            value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >
             <option value="">None</option>
@@ -102,6 +113,7 @@ export default function LeadsList() {
               <select
                 name="agent-filter"
                 id="agent-filter"
+                value={salesAgentFilter}
                 onChange={(e) => setSalesAgentFilter(e.target.value)}
                 required
               >
@@ -127,8 +139,8 @@ export default function LeadsList() {
             type="radio"
             name="prioritySort"
             id="timeToCloseSort"
-            onChange={() => setLeadsSort("priorityLTH")}
-            checked={leadsSort === "priorityLTH"}
+            onChange={() => setPrioritySort("asc")}
+            checked={prioritySort === "asc"}
           />{" "}
           Low to High
           <br />
@@ -136,8 +148,8 @@ export default function LeadsList() {
             type="radio"
             name="prioritySort"
             id="timeToCloseSort"
-            onChange={() => setLeadsSort("priorityHTL")}
-            checked={leadsSort === "priorityHTL"}
+            onChange={() => setPrioritySort("desc")}
+            checked={prioritySort === "desc"}
           />{" "}
           High to Low
           <br />
@@ -149,8 +161,8 @@ export default function LeadsList() {
             type="radio"
             id="timeToCloseSort"
             name="timeToCloseSort"
-            onChange={() => setLeadsSort("timeToCloseLTH")}
-            checked={leadsSort === "timeToCloseLTH"}
+            onChange={() => setTimeToCloseSort("asc")}
+            checked={timeToCloseSort === "asc"}
           />{" "}
           Low to High
           <br />
@@ -158,8 +170,8 @@ export default function LeadsList() {
             type="radio"
             id="timeToCloseSort"
             name="timeToCloseSort"
-            onChange={() => setLeadsSort("timeToCloseHTL")}
-            checked={leadsSort === "timeToCloseHTL"}
+            onChange={() => setTimeToCloseSort("desc")}
+            checked={timeToCloseSort === "desc"}
           />{" "}
           High to Low
         </div>

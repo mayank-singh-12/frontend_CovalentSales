@@ -1,6 +1,7 @@
 import { createContext, useContext, useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import axios from "axios";
 
 const LeadsContext = createContext();
 
@@ -14,6 +15,12 @@ export function LeadsProvider({ children }) {
   const paramStatus = searchParams.get("status") || "";
   const paramSalesAgent = searchParams.get("agent") || "";
 
+  // leads related state var's
+  const [leads, setLeads] = useState(null);
+  const [leadsLoading, setLeadsLoading] = useState(true);
+  const [leadsErr, setLeadsErr] = useState(null);
+
+  // filtering related state var's
   const [statusFilter, setStatusFilter] = useState(paramStatus);
   const [salesAgentFilter, setSalesAgentFilter] = useState(paramSalesAgent);
 
@@ -43,8 +50,6 @@ export function LeadsProvider({ children }) {
     updateSearchParams("agent", agent);
   }
 
-  // function
-
   const params = useMemo(
     () => ({
       status: statusFilter,
@@ -53,19 +58,39 @@ export function LeadsProvider({ children }) {
     [statusFilter, salesAgentFilter]
   );
 
-  const { data, loading, error } = useFetch(
-    `https://backend-covalent-sales.vercel.app/leads`,
-    params
-  );
+  async function fetchLeads(params = null) {
+    try {
+      setLeads(null);
+      setLeadsLoading(true);
+      const response = await axios.get(
+        "https://backend-covalent-sales.vercel.app/leads",
+        { params: params }
+      );
+      setLeads(response.data);
+      setLeadsErr(null);
+    } catch (err) {
+      setLeadsErr(err.response.data.error);
+    } finally {
+      setLeadsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchLeads(params);
+    console.log(params);
+  }, [params]);
 
   return (
     <LeadsContext.Provider
       value={{
-        leads: data || [],
-        leadsLoading: loading,
-        leadsErr: error,
+        leads: leads || [],
+        leadsLoading: leadsLoading,
+        leadsErr: leadsErr,
+        statusFilter: statusFilter,
+        salesAgentFilter: salesAgentFilter,
         setStatusFilter: updateStatusFilter,
         setSalesAgentFilter: updateSalesAgentFilter,
+        fetchLeads: fetchLeads,
       }}
     >
       {children}

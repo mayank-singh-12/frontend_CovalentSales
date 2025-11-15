@@ -15,7 +15,7 @@ export default function LeadsByStatus() {
   } = useLeads();
 
   const [searchParams, setSearchParams] = useSearchParams();
-
+ 
   const [leadsSort, setLeadsSort] = useState("");
 
   const status = searchParams.get("status");
@@ -34,17 +34,17 @@ export default function LeadsByStatus() {
     <>
       <main className="container">
         <Link to="/">Back to Dashboard</Link>
-        <h1>Leads By Status</h1>
-        <hr />
-        <h3>Lead List by Status</h3>
+        <h1 className="text-center">Leads By Status</h1>
         <hr />
         <h3>Status: {status}</h3>
         <hr />
         <div>
           {leads.map((lead) => (
-            <Link to={`/leads/${lead._id}`} key={lead._id}>
-              {lead.name} - {lead.salesAgent.name}
-            </Link>
+            <div key={lead._id}>
+              <Link to={`/leads/${lead._id}`}>
+                {lead.name} - {lead.salesAgent.name}
+              </Link>
+            </div>
           ))}
         </div>
         <hr />
