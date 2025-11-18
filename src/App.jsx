@@ -10,6 +10,7 @@ import AddNewLead from "./pages/AddNewLead";
 import LeadsList from "./pages/LeadsList";
 import LeadManagement from "./pages/LeadManagement";
 import LeadsByStatus from "./pages/LeadsByStatus";
+import LeadsBySalesAgents from "./pages/LeadsBySalesAgents";
 import AddNewAgent from "./pages/AddNewAgent";
 import SalesAgentsManagement from "./pages/SalesAgentsManagement";
 
@@ -32,6 +33,7 @@ export default function App() {
               <Route path="/leads/new" element={<AddNewLead />} />
               <Route path="/leads/:id" element={<LeadManagement />} />
               <Route path="/leads/status" element={<LeadsByStatus />} />
+              <Route path="/leads/agents" element={<LeadsBySalesAgents />} />
             </Routes>
           </LeadsProvider>
         </SalesAgentProvider>

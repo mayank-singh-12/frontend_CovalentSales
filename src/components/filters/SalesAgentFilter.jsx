@@ -1,5 +1,5 @@
-import useSalesAgent from "../contexts/SalesAgentsContext";
-import useLeads from "../contexts/LeadsContext";
+import useSalesAgent from "../../contexts/SalesAgentsContext";
+import useLeads from "../../contexts/LeadsContext";
 
 export default function SalesAgentFilter() {
   const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();

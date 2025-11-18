@@ -6,17 +6,15 @@ import { Link } from "react-router-dom";
 import useLeads from "../contexts/LeadsContext";
 import useSalesAgent from "../contexts/SalesAgentsContext";
 
-import SalesAgentFilter from "../components/SalesAgentFilter";
+import SalesAgentFilter from "../components/filters/SalesAgentFilter";
+import PriorityFilter from "../components/filters/PriorityFilter";
+
+import PrioritySort from "../components/sorts/PrioritySort";
+import TimeToCloseSort from "../components/sorts/TimeToCloseSort";
 
 export default function LeadsByStatus() {
   const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
-  const {
-    leads,
-    leadsLoading,
-    leadsErr,
-    setStatusFilter,
-    setSalesAgentFilter,
-  } = useLeads();
+  const { sortedLeads } = useLeads();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -24,15 +22,15 @@ export default function LeadsByStatus() {
 
   const status = searchParams.get("status");
 
-  let sortedLeads = leads;
+  // let sortedLeads = leads;
 
-  // sorting by time to close
-  if (leadsSort === "timeToCloseLTH") {
-    sortedLeads = leads.toSorted((a, b) => a.timeToClose - b.timeToClose);
-  }
-  if (leadsSort === "timeToCloseHTL") {
-    sortedLeads = sortedLeads.toSorted((a, b) => b.timeToClose - a.timeToClose);
-  }
+  // // sorting by time to close
+  // if (leadsSort === "timeToCloseLTH") {
+  //   sortedLeads = leads.toSorted((a, b) => a.timeToClose - b.timeToClose);
+  // }
+  // if (leadsSort === "timeToCloseHTL") {
+  //   sortedLeads = sortedLeads.toSorted((a, b) => b.timeToClose - a.timeToClose);
+  // }
 
   return (
     <>
@@ -43,10 +41,11 @@ export default function LeadsByStatus() {
         <h3>Status: {status}</h3>
         <hr />
         <div>
-          {leads.map((lead) => (
+          {sortedLeads?.map((lead) => (
             <div key={lead._id}>
               <Link to={`/leads/${lead._id}`}>
-                {lead.name} - {lead.salesAgent.name}
+                {lead.name} - {lead.salesAgent.name} - {lead.priority} -{" "}
+                {lead.timeToClose}
               </Link>
             </div>
           ))}
@@ -54,10 +53,18 @@ export default function LeadsByStatus() {
         <hr />
         {/* filters */}
         <h3>Filters</h3>
+        {/* sales agent filter */}
         <SalesAgentFilter />
+        <br />
+        {/* priority filter */}
+        <PriorityFilter />
         <hr />
         <h3>Sort by</h3>
-        <label htmlFor="">Time to Close:</label>
+
+        <TimeToCloseSort />
+        {/* <PrioritySort/> */}
+
+        {/* <label htmlFor="">Time to Close:</label>
         <br />
         <input
           type="radio"
@@ -75,7 +82,7 @@ export default function LeadsByStatus() {
           onChange={() => setLeadsSort("timeToCloseHTL")}
           checked={leadsSort === "timeToCloseHTL"}
         />{" "}
-        High to Low
+        High to Low */}
       </main>
     </>
   );

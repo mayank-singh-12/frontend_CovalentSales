@@ -31,10 +31,16 @@ export default function SalesAgentsManagement() {
                               className="card record-card mb-2"
                               key={agent._id}
                             >
-                              <div className="card-body">
+                              <Link
+                                to={{
+                                  pathname: `/leads/agents`,
+                                  search: `agent=${agent._id}`,
+                                }}
+                                className="card-body text-decoration-none"
+                              >
                                 <p className="m-0">Name: {agent.name}</p>{" "}
                                 <p className="m-0">Email: {agent.email}</p>
-                              </div>
+                              </Link>
                             </div>
                           ))}
                         </>

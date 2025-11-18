@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -71,6 +71,7 @@ export default function AddNewLead() {
   return (
     <>
       <main className="container">
+        <Link to="/">Back to Dashboard</Link>
         <h1>Add New Lead</h1>
 
         <form onSubmit={handleForm}>

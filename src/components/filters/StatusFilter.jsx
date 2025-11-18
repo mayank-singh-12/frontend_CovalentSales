@@ -1,4 +1,4 @@
-import useLeads from "../contexts/LeadsContext";
+import useLeads from "../../contexts/LeadsContext";
 
 export default function StatusFilter() {
   const { statusFilter, setStatusFilter } = useLeads();

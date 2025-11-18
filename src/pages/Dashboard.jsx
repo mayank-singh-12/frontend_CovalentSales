@@ -1,4 +1,5 @@
 import useLeads from "../contexts/LeadsContext";
+import StatusFilter from "../components/filters/StatusFilter";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -59,21 +60,10 @@ export default function Dashboard() {
 
         <hr />
         <h3>Quick Filters</h3>
-        <div>
-          <label htmlFor="statusFilter">Status:</label>
-          <select
-            name="statusFilter"
-            id="statusFilter"
-            onChange={(e) => setStatusFilter(e.target.value)}
-          >
-            <option value="">None</option>
-            <option value="New">New</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Qualified">Qualified</option>
-            <option value="Proposal Sent">Proposal Sent</option>
-            <option value="Closed">Closed</option>
-          </select>
-        </div>
+
+        {/* filter by status */}
+        <StatusFilter />
+
         <br />
         <Link to="/leads/new" className="btn btn-dark">
           + Add new Lead
