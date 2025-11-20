@@ -13,10 +13,12 @@ import LeadsByStatus from "./pages/LeadsByStatus";
 import LeadsBySalesAgents from "./pages/LeadsBySalesAgents";
 import AddNewAgent from "./pages/AddNewAgent";
 import SalesAgentsManagement from "./pages/SalesAgentsManagement";
+import Reports from "./pages/Reports";
 
 // CONTEXT
 import { SalesAgentProvider } from "./contexts/SalesAgentsContext";
 import { LeadsProvider } from "./contexts/LeadsContext";
+import { ReportsProvider } from "./contexts/ReportsContext";
 
 export default function App() {
   return (
@@ -25,16 +27,19 @@ export default function App() {
         <ToastContainer position="bottom-right" pauseOnHover theme="colored" />
         <SalesAgentProvider>
           <LeadsProvider>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/agents" element={<SalesAgentsManagement />} />
-              <Route path="/agents/new" element={<AddNewAgent />} />
-              <Route path="/leads" element={<LeadsList />} />
-              <Route path="/leads/new" element={<AddNewLead />} />
-              <Route path="/leads/:id" element={<LeadManagement />} />
-              <Route path="/leads/status" element={<LeadsByStatus />} />
-              <Route path="/leads/agents" element={<LeadsBySalesAgents />} />
-            </Routes>
+            <ReportsProvider>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/agents" element={<SalesAgentsManagement />} />
+                <Route path="/agents/new" element={<AddNewAgent />} />
+                <Route path="/leads" element={<LeadsList />} />
+                <Route path="/leads/new" element={<AddNewLead />} />
+                <Route path="/leads/:id" element={<LeadManagement />} />
+                <Route path="/leads/status" element={<LeadsByStatus />} />
+                <Route path="/leads/agents" element={<LeadsBySalesAgents />} />
+                <Route path="/reports" element={<Reports />} />
+              </Routes>
+            </ReportsProvider>
           </LeadsProvider>
         </SalesAgentProvider>
       </BrowserRouter>

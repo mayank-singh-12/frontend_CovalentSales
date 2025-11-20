@@ -4,11 +4,14 @@ import useFetch from "../hooks/useFetch";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Select from "react-select";
+
 import useSalesAgent from "../contexts/SalesAgentsContext";
+import useLeads from "../contexts/LeadsContext";
 
 export default function AddNewLead() {
   const navigate = useNavigate();
 
+  const { fetchLeads } = useLeads();
   const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
 
   // fetching tags from TAGS API
@@ -62,6 +65,7 @@ export default function AddNewLead() {
         newLeadData
       );
       toast.success("New Lead Added!");
+      fetchLeads();
       navigate("/leads");
     } catch (err) {
       toast.error(err.response.data.error);
@@ -188,7 +192,7 @@ export default function AddNewLead() {
               id="input-timeToClose"
               placeholder="Number of days"
               value={timeToClose}
-              onChange={(e) => setTimeToClose(parseInt(e.target.value))}
+              onChange={(e) => setTimeToClose(parseInt(e.target.value) || "")}
             />
           </div>
           <br />

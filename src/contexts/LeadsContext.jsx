@@ -12,7 +12,7 @@ export function LeadsProvider({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   // leads related state var's
-  const [leads, setLeads] = useState(null);
+  const [leads, setLeads] = useState([]);
   const [leadsLoading, setLeadsLoading] = useState(true);
   const [leadsErr, setLeadsErr] = useState(null);
 
@@ -64,7 +64,7 @@ export function LeadsProvider({ children }) {
 
   async function fetchLeads(params = null) {
     try {
-      setLeads(null);
+      setLeads([]);
       setLeadsLoading(true);
       const response = await axios.get(
         "https://backend-covalent-sales.vercel.app/leads",
@@ -124,12 +124,23 @@ export function LeadsProvider({ children }) {
 
   let sortedLeads = leads && multiSort(leads, sortConfig);
 
+  const leadsByStatus = leads?.reduce((acc, curr) => {
+    if (!acc[curr.status]) {
+      acc[curr.status] = [];
+    }
+    acc[curr.status].push(curr);
+    return acc;
+  }, {});
+
   return (
     <LeadsContext.Provider
       value={{
         leads: leads,
         leadsLoading: leadsLoading,
         leadsErr: leadsErr,
+
+        // leads grouped by status
+        leadsByStatus: leadsByStatus,
 
         // filters
         statusFilter: statusFilter,

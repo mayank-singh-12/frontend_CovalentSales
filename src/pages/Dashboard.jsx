@@ -3,15 +3,8 @@ import StatusFilter from "../components/filters/StatusFilter";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
-  const { leads, leadsLoading, leadsErr, setStatusFilter } = useLeads();
-
-  const leadsByStatus = leads?.reduce((acc, curr) => {
-    if (!acc[curr.status]) {
-      acc[curr.status] = [];
-    }
-    acc[curr.status].push(curr);
-    return acc;
-  }, {});
+  const { leads, leadsLoading, leadsErr, leadsByStatus, setStatusFilter } =
+    useLeads();
 
   return (
     <>
