@@ -39,12 +39,11 @@ export default function Reports() {
   const { leads, leadsLoading, leadsErr, leadsByStatus } = useLeads();
 
   // Pie chart config for total leads closed and in pipeline
-  const leadsClosed = leads.length - leadsInPipeline;
   const dataForLeadsSummary = {
     labels: ["Leads Closed", "Leads in Pipeline"],
     datasets: [
       {
-        data: [leadsClosed, leadsInPipeline],
+        data: [leadsClosedLastWeek.length, leadsInPipeline],
         backgroundColor: ["#36A2EB", "lightgreen"],
         borderColor: "white",
         borderWidth: 1,
@@ -80,9 +79,6 @@ export default function Reports() {
         data: Object.keys(closedLeadsByAgents).map(
           (key) => closedLeadsByAgents[key].length
         ),
-        // backgroundColor: ["red", "blue"],
-        // borderColor: ["rgba(0, 102, 34, 1)", "rgba(69, 94, 0, 1)"],
-        // borderWidth: 1,
       },
     ],
   };
@@ -103,21 +99,6 @@ export default function Reports() {
         data: Object.keys(leadsByStatus).map(
           (status) => leadsByStatus[status].length
         ),
-        // backgroundColor: [
-        //   "rgba(117, 255, 99, 0.2)",
-        //   "rgba(255, 135, 99, 0.2)",
-        //   "rgba(235, 54, 139, 0.2)",
-        //   "rgba(54, 57, 235, 0.2)",
-        //   "rgba(163, 54, 235, 0.2)",
-        // ],
-        // borderColor: [
-        //   "rgba(33, 139, 0, 1)",
-        //   "rgba(255, 135, 99, 1)",
-        //   "rgba(235, 54, 139, 1)",
-        //   "rgba(54, 57, 235, 1)",
-        //   "rgba(163, 54, 235, 1)",
-        // ],
-        // borderWidth: 3,
       },
     ],
   };
@@ -130,17 +111,14 @@ export default function Reports() {
         <h3>Report Overview</h3>
         <hr />
         <p>Total Leads closed and in Pipeline: </p>
-        {leadsInPipelineLoading ||
-        leadsClosedLastWeekLoading ||
-        leadsLoading ? (
+        {leadsInPipelineLoading || leadsClosedLastWeekLoading ? (
           <p>Loading...</p>
-        ) : leads.length > 0 && leadsInPipeline > 0 ? (
+        ) : leadsClosedLastWeek.length > 0 && leadsInPipeline > 0 ? (
           <div style={{ width: "400px" }}>
             <Pie data={dataForLeadsSummary} options={options} />
           </div>
         ) : (
           <>
-            {leadsErr && <p>{leadsErr}</p>}
             {leadsInPipelineErr && <p>{leadsInPipelineErr}</p>}
             {leadsClosedLastWeekErr && <p>{leadsClosedLastWeekErr}</p>}
           </>

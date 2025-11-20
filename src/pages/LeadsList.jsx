@@ -1,5 +1,4 @@
 import useLeads from "../contexts/LeadsContext";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import SalesAgentFilter from "../components/filters/SalesAgentFilter";
