@@ -19,6 +19,7 @@ import Reports from "./pages/Reports";
 import { SalesAgentProvider } from "./contexts/SalesAgentsContext";
 import { LeadsProvider } from "./contexts/LeadsContext";
 import { ReportsProvider } from "./contexts/ReportsContext";
+import { CommentsProvider } from "./contexts/CommentsContext";
 
 export default function App() {
   return (
@@ -28,17 +29,22 @@ export default function App() {
         <SalesAgentProvider>
           <LeadsProvider>
             <ReportsProvider>
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/agents" element={<SalesAgentsManagement />} />
-                <Route path="/agents/new" element={<AddNewAgent />} />
-                <Route path="/leads" element={<LeadsList />} />
-                <Route path="/leads/new" element={<AddNewLead />} />
-                <Route path="/leads/:id" element={<LeadManagement />} />
-                <Route path="/leads/status" element={<LeadsByStatus />} />
-                <Route path="/leads/agents" element={<LeadsBySalesAgents />} />
-                <Route path="/reports" element={<Reports />} />
-              </Routes>
+              <CommentsProvider>
+                <Routes>
+                  <Route path="/" element={<Dashboard />} />
+                  <Route path="/agents" element={<SalesAgentsManagement />} />
+                  <Route path="/agents/new" element={<AddNewAgent />} />
+                  <Route path="/leads" element={<LeadsList />} />
+                  <Route path="/leads/new" element={<AddNewLead />} />
+                  <Route path="/leads/:id" element={<LeadManagement />} />
+                  <Route path="/leads/status" element={<LeadsByStatus />} />
+                  <Route
+                    path="/leads/agents"
+                    element={<LeadsBySalesAgents />}
+                  />
+                  <Route path="/reports" element={<Reports />} />
+                </Routes>
+              </CommentsProvider>
             </ReportsProvider>
           </LeadsProvider>
         </SalesAgentProvider>
