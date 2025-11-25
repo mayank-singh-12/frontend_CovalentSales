@@ -36,14 +36,6 @@ export default function AddNewAgent() {
       setError("");
       setName("");
       setEmail("");
-
-      // const { data, loading, error } = useFetch(
-      //   "https://backend-covalent-sales.vercel.app/agents"
-      // );
-      // if (data) setSalesAgents(data);
-      // if (loading) setSalesAgentsLoading(loading);
-      // if (error) setSalesAgentsErr(error);
-
       fetchAgents();
       navigate("/agents");
     } catch (err) {

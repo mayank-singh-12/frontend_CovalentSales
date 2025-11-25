@@ -55,8 +55,8 @@ input:focus {
 }
 
 .list-card {
-  height: 500px;
-  border-radius: 0;
+  height: 480px !important;
+  border-radius: 0 !important;
 }
 
 .record-card {
