@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap-icons/font/bootstrap-icons"; 
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 // import "./styles.css";
 
 // PAGES

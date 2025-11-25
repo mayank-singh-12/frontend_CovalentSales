@@ -90,7 +90,6 @@ export function LeadsProvider({ children }) {
 
   useEffect(() => {
     fetchLeads(params);
-    console.log(params);
   }, [params]);
 
   const priorityArr = ["Low", "Medium", "High"];

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
 
-:root{
-    --bg-light-grey: rgb(245, 245, 245); 
+:root {
+  --bg-light-grey: rgb(245, 245, 245);
 }
 
 * {
@@ -9,51 +9,76 @@
   box-sizing: border-box;
 }
 
-main{
-    width: 100vw;
-    height: 100vh;
+main {
+  width: 100vw;
+  height: 100vh;
 }
 
-.container{
-    width: 100vw;
-    height: 100vh;
+.container {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 55px;
 }
 
-input:focus{
-    outline:none
+.inner-container{
+  height: 100%;
 }
 
-.section{
-    margin: 1rem 0;
+input:focus {
+  outline: none;
+}
+
+.section {
+  margin: 1rem 0;
 }
 
 .form-card {
- border: 1px solid gray;
- width: 300px;
+  border: 1px solid gray;
+  width: 300px;
 }
 
-.form-flex{
-    display: flex;
-    flex-direction: column;
+.form-flex {
+  display: flex;
+  flex-direction: column;
 }
 
-.form-card-heading{
-    text-align: center;
+.form-card-heading {
+  text-align: center;
 }
 
-.form-card-body{
-    padding: 0rem 1rem;
+.form-card-body {
+  padding: 0rem 1rem;
 }
 
-.err-msg{
-    color: red;
+.err-msg {
+  color: red;
 }
 
-.list-card{
-    height: 500px;
-    border-radius: 0;
+.list-card {
+  height: 500px;
+  border-radius: 0;
 }
 
-.record-card{
-    background-color: rgb(243, 243, 243);
+.record-card {
+  background-color: rgb(243, 243, 243) !important;
+}
+
+/* Reports */
+
+.chart-container {
+  height: 100% !important;
+  /* max-width: 100% !important; */
+}
+
+.chart {
+  width: 280px;
+}
+
+/* navbar */
+.nav-bg {
+  background-color: #36a2eb;
+}
+
+.nav-brand-text {
+  color: white;
 }

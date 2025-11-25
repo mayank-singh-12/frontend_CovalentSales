@@ -11,8 +11,11 @@ import {
 } from "chart.js";
 import { Pie, Bar } from "react-chartjs-2";
 
+import { Link } from "react-router-dom";
 import useReports from "../contexts/ReportsContext";
 import useLeads from "../contexts/LeadsContext";
+
+import Header from "../components/general/Header";
 
 ChartJS.register(
   ArcElement,
@@ -105,17 +108,28 @@ export default function Reports() {
 
   return (
     <>
-      <main className="container">
-        <h1>Covalent Sales Reports</h1>
+      <Header/>
+      <main className="container chart-container mb-3">
+        <Link className="text-decoration-none" to="/">
+          {" "}
+          <span>
+            {" "}
+            <i class="bi bi-arrow-left-square"></i>{" "}
+          </span>{" "}
+          Dashboard
+        </Link>
+        <h3 className="text-center">Report Overview</h3>
         <hr />
-        <h3>Report Overview</h3>
-        <hr />
-        <p>Total Leads closed and in Pipeline: </p>
+        <p className="text-center fw-bold">
+          Total Leads closed and in Pipeline
+        </p>
         {leadsInPipelineLoading || leadsClosedLastWeekLoading ? (
           <p>Loading...</p>
         ) : leadsClosedLastWeek.length > 0 && leadsInPipeline > 0 ? (
-          <div style={{ width: "400px" }}>
-            <Pie data={dataForLeadsSummary} options={options} />
+          <div className="d-flex justify-content-center">
+            <div className="chart">
+              <Pie data={dataForLeadsSummary} options={options} />
+            </div>
           </div>
         ) : (
           <>
@@ -125,24 +139,28 @@ export default function Reports() {
         )}
 
         <hr />
-        <p>Leads Closed by Sales Agent: </p>
+        <p className="text-center fw-bold">Leads Closed by Sales Agent</p>
         {leadsLoading ? (
           <p>Loading...</p>
         ) : leads.length > 0 ? (
-          <div style={{ width: "400px" }}>
-            <Bar data={dataForClosedLeadsByAgents} options={options} />
+          <div className="d-flex justify-content-center">
+            <div className="chart">
+              <Bar data={dataForClosedLeadsByAgents} options={options} />
+            </div>
           </div>
         ) : (
           <>{leadsErr && <p>{leadsErr}</p>}</>
         )}
 
         <hr />
-        <p>Leads Status Distribution: </p>
+        <p className="text-center fw-bold">Leads Status Distribution </p>
         {leadsLoading ? (
           <p>Loading...</p>
         ) : leads.length > 0 ? (
-          <div style={{ width: "400px" }}>
-            <Pie data={dataForLeadsDistribution} options={options} />
+          <div className="d-flex justify-content-center">
+            <div className="chart">
+              <Pie data={dataForLeadsDistribution} options={options} />
+            </div>
           </div>
         ) : (
           <>{leadsErr && <p>{leadsErr}</p>}</>

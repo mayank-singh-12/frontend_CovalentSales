@@ -21,6 +21,7 @@ export function CommentsProvider({ children }) {
       setComments(response.data);
       setCommetsErr(null);
     } catch (err) {
+      console.log(err);
       setCommetsErr(err.response.data.error);
     } finally {
       setCommetsLoading(false);

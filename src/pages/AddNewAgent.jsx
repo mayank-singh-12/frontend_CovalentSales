@@ -2,7 +2,9 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Header from "../components/general/Header";
 import useSalesAgent from "../contexts/SalesAgentsContext";
+import { Link } from "react-router-dom";
 
 export default function AddNewAgent() {
   const navigate = useNavigate();
@@ -53,14 +55,24 @@ export default function AddNewAgent() {
   }
   return (
     <>
-      <main>
-        <div className="container d-flex justify-content-center align-items-center">
+      <Header />
+      <main className="container overflow-hidden">
+        <Link className="text-decoration-none" to="/agents">
+          {" "}
+          <span>
+            {" "}
+            <i class="bi bi-arrow-left-square"></i>{" "}
+          </span>{" "}
+          Sales Agents
+        </Link>
+
+        <div className="inner-container d-flex justify-content-center align-items-center ">
           {loading ? (
             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
           ) : (
-            <div className="form-card form-flex ">
+            <div className="form-card form-flex mb-5">
               <form className="form-card-body" onSubmit={createAgentHandler}>
                 <div className="section form-card-heading">
                   <h1>New Sales Agent</h1>

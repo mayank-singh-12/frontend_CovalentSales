@@ -44,7 +44,6 @@ export default function LeadManagement() {
       setCommentText("");
       toast.success(response.data.message);
     } catch (err) {
-      // console.log(err);
       toast.error(err.response.data.error);
     } finally {
       setAddCommentLoading(false);
