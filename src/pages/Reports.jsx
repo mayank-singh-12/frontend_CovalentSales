@@ -109,7 +109,7 @@ export default function Reports() {
   return (
     <>
       <Header/>
-      <main className="container chart-container mb-3">
+      <main className="container custom-container mb-3">
         <Link className="text-decoration-none" to="/">
           {" "}
           <span>

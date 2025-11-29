@@ -3,9 +3,9 @@ export default function Header({children="Covalent Sales"}) {
     <header>
       <nav class="navbar nav-bg shadow fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand nav-brand-text " href="#">
+          <span class="navbar-brand text-light">
             {children}
-          </a>
+          </span>
         </div>
       </nav>
     </header>

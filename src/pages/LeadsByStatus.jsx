@@ -4,85 +4,102 @@ import { Link } from "react-router-dom";
 
 // context
 import useLeads from "../contexts/LeadsContext";
-import useSalesAgent from "../contexts/SalesAgentsContext";
 
 import SalesAgentFilter from "../components/filters/SalesAgentFilter";
 import PriorityFilter from "../components/filters/PriorityFilter";
 
-import PrioritySort from "../components/sorts/PrioritySort";
 import TimeToCloseSort from "../components/sorts/TimeToCloseSort";
 
+import PageHeading from "../components/general/pageHeading";
+import SideBar from "../components/general/SideBar";
+
 export default function LeadsByStatus() {
-  const { salesAgents, salesAgentsLoading, salesAgentsErr } = useSalesAgent();
-  const { sortedLeads } = useLeads();
+  const { sortedLeads, leadsLoading, leadsErr } = useLeads();
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const [leadsSort, setLeadsSort] = useState("");
+  const [searchParams] = useSearchParams();
 
   const status = searchParams.get("status");
 
-  // let sortedLeads = leads;
-
-  // // sorting by time to close
-  // if (leadsSort === "timeToCloseLTH") {
-  //   sortedLeads = leads.toSorted((a, b) => a.timeToClose - b.timeToClose);
-  // }
-  // if (leadsSort === "timeToCloseHTL") {
-  //   sortedLeads = sortedLeads.toSorted((a, b) => b.timeToClose - a.timeToClose);
-  // }
-
   return (
     <>
-      <main className="container">
-        <Link to="/">Back to Dashboard</Link>
-        <h1 className="text-center">Leads By Status</h1>
-        <hr />
-        <h3>Status: {status}</h3>
-        <hr />
-        <div>
-          {sortedLeads?.map((lead) => (
-            <div key={lead._id}>
-              <Link to={`/leads/${lead._id}`}>
-                {lead.name} - {lead.salesAgent.name} - {lead.priority} -{" "}
-                {lead.timeToClose}
-              </Link>
-            </div>
-          ))}
+      <SideBar>
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/"
+        >
+          <i class="bi bi-card-list mx-2"></i>
+          Dashboard
+        </Link>
+      </SideBar>
+      <main className="container custom-container my-3">
+        <PageHeading>Status: {status}</PageHeading>
+
+        <div className="card grow-list-card overflow-auto my-3">
+          <div className="card-body ">
+            {leadsLoading ? (
+              <p>Loading...</p>
+            ) : sortedLeads.length > 0 ? (
+              <div>
+                {sortedLeads.map((lead) => (
+                  <div className="card lead-card mb-2" key={lead._id}>
+                    <div className="card-body">
+                      <Link
+                        className="text-decoration-none text-dark"
+                        to={`/leads/${lead._id}`}
+                      >
+                        <div className="row">
+                          <div className="col-12 col-sm-6">
+                            <p className="mb-2 m-sm-0">Name: {lead.name}</p>
+                            <p className="mb-2 m-sm-0">
+                              Sales Agent: {lead.salesAgent.name}
+                            </p>
+                          </div>
+                          <div className="col-12 col-sm-6">
+                            <p className="mb-2 m-sm-0">
+                              priority: {lead.priority}
+                            </p>
+                            <p className="mb-2 m-sm-0">
+                              Time to Close: {lead.timeToClose}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              leadsErr && <p>{leadsErr}</p>
+            )}
+          </div>
         </div>
-        <hr />
-        {/* filters */}
-        <h3>Filters</h3>
-        {/* sales agent filter */}
-        <SalesAgentFilter />
-        <br />
-        {/* priority filter */}
-        <PriorityFilter />
-        <hr />
-        <h3>Sort by</h3>
 
-        <TimeToCloseSort />
-        {/* <PrioritySort/> */}
+        <div className="row g-3">
+          <div className="col-12 col-sm-6">
+            <div className="card">
+              <div className="card-body">
+                {/* filters */}
+                <h3 className="text-center">Filters</h3>
+                {/* sales agent filter */}
+                <SalesAgentFilter />
+                <br />
+                {/* priority filter */}
+                <PriorityFilter />
+              </div>
+            </div>
+          </div>
 
-        {/* <label htmlFor="">Time to Close:</label>
-        <br />
-        <input
-          type="radio"
-          id="timeToCloseSort"
-          name="timeToCloseSort"
-          onChange={() => setLeadsSort("timeToCloseLTH")}
-          checked={leadsSort === "timeToCloseLTH"}
-        />{" "}
-        Low to High
-        <br />
-        <input
-          type="radio"
-          id="timeToCloseSort"
-          name="timeToCloseSort"
-          onChange={() => setLeadsSort("timeToCloseHTL")}
-          checked={leadsSort === "timeToCloseHTL"}
-        />{" "}
-        High to Low */}
+          {/* <TimeToCloseSort/> */}
+          <div className="col-12 col-sm-6">
+            <div className="card">
+              <div className="card-body">
+                <h3 className="text-center">Sort by</h3>
+                <TimeToCloseSort />
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </>
   );

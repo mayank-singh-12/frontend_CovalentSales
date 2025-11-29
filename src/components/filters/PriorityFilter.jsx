@@ -5,8 +5,11 @@ export default function PriorityFilter() {
 
   return (
     <div>
-      <label htmlFor="priorityFilter">Priority:</label>
+      <label className="form-label" htmlFor="priorityFilter">
+        Priority:
+      </label>
       <select
+        className="form-select"
         name="priorityFilter"
         id="priorityFilter"
         value={priorityFilter}

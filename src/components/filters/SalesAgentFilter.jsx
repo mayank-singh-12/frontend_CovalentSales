@@ -7,13 +7,14 @@ export default function SalesAgentFilter() {
 
   return (
     <div>
-      <label htmlFor="agent-filter">Sales Agent:</label>
+      <label htmlFor="agent-filter">Sales Agent</label>
 
       {salesAgentsLoading ? (
         <span>Loading...</span>
       ) : salesAgents && salesAgents.length > 0 ? (
         <>
           <select
+            className="form-select"
             name="agent-filter"
             id="agent-filter"
             value={salesAgentFilter}

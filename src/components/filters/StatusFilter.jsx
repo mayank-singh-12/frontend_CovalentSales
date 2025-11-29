@@ -5,10 +5,11 @@ export default function StatusFilter() {
 
   return (
     <div>
-      <label htmlFor="statusFilter">Status:</label>
+      <label htmlFor="statusFilter">Status</label>
       <select
         name="statusFilter"
         id="statusFilter"
+        className="form-select"
         value={statusFilter}
         onChange={(e) => setStatusFilter(e.target.value)}
       >

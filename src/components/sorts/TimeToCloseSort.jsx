@@ -8,22 +8,28 @@ export default function TimeToCloseSort() {
       <label htmlFor="">Time to Close:</label>
       <br />
       <input
+        className="form-check-input"
         type="radio"
-        id="timeToCloseSort"
+        id="timeToCloseLTHSort"
         name="timeToCloseSort"
         onChange={() => setTimeToCloseSort("asc")}
         checked={timeToCloseSort === "asc"}
       />{" "}
-      Low to High
+      <label className="form-check-label" for="timeToCloseLTHSort">
+        Low to High
+      </label>
       <br />
       <input
-        type="radio"
-        id="timeToCloseSort"
+        className="form-check-input"
+        type="radio"  
+        id="timeToCloseHTLSort"
         name="timeToCloseSort"
         onChange={() => setTimeToCloseSort("desc")}
         checked={timeToCloseSort === "desc"}
       />{" "}
-      High to Low
+      <label className="form-check-label" for="timeToCloseHTLSort">
+        High to Low
+      </label>
     </>
   );
 }
