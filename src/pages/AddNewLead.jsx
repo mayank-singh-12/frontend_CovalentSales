@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Select from "react-select";
 
 import Header from "../components/general/Header";
-import PageHeading from "../components/general/pageHeading";
+import PageHeading from "../components/general/PageHeading";
 import SideBar from "../components/general/SideBar";
 
 import useSalesAgent from "../contexts/SalesAgentsContext";
