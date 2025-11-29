@@ -12,7 +12,7 @@ import useComments from "../contexts/CommentsContext";
 import useSideBar from "../contexts/SideBarContext";
 
 import SideBar from "../components/general/SideBar";
-import PageHeading from "../components/general/pageHeading";
+import PageHeading from "../components/general/PageHeading";
 
 import Header from "../components/general/Header";
 

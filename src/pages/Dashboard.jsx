@@ -2,7 +2,7 @@ import useLeads from "../contexts/LeadsContext";
 import StatusFilter from "../components/filters/StatusFilter";
 import { Link } from "react-router-dom";
 
-import PageHeading from "../components/general/pageHeading";
+import PageHeading from "../components/general/PageHeading";
 
 import SideBar from "../components/general/SideBar";
 

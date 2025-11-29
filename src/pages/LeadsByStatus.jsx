@@ -10,7 +10,7 @@ import PriorityFilter from "../components/filters/PriorityFilter";
 
 import TimeToCloseSort from "../components/sorts/TimeToCloseSort";
 
-import PageHeading from "../components/general/pageHeading";
+import PageHeading from "../components/general/PageHeading";
 import SideBar from "../components/general/SideBar";
 
 export default function LeadsByStatus() {
