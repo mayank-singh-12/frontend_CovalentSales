@@ -64,29 +64,28 @@ export default function LeadManagement() {
 
   return (
     <>
-      <Header />
+      {/* sidebar */}
+      <SideBar>
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/leads"
+        >
+          <i className="bi bi-person-lines-fill mx-2"></i>
+          Leads
+        </Link>
+
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/"
+        >
+          <i className="bi bi-card-list mx-2"></i>
+          Dashboard
+        </Link>
+      </SideBar>
+
       <main className="container custom-container my-3">
-        {/* sidebar */}
-        <SideBar>
-          <Link
-            className="p-2 text-dark text-decoration-none sidebar-link"
-            onClick={() => setShow(false)}
-            to="/leads"
-          >
-            <i className="bi bi-person-lines-fill mx-2"></i>
-            Leads
-          </Link>
-
-          <Link
-            className="p-2 text-dark text-decoration-none sidebar-link"
-            onClick={() => setShow(false)}
-            to="/"
-          >
-            <i class="bi bi-card-list mx-2"></i>
-            Dashboard
-          </Link>
-        </SideBar>
-
         <PageHeading>
           Leads Management:{" "}
           {leadsLoading ? (
@@ -111,7 +110,12 @@ export default function LeadManagement() {
                     Lead Name: {leadData.name}
                   </p>
                   <p className="list-group-item m-0">
-                    Sales Agent: {leadData.salesAgent.name}
+                    Sales Agent:{" "}
+                    {leadData.salesAgent ? (
+                      leadData.salesAgent.name
+                    ) : (
+                      <span className="text-danger">None</span>
+                    )}
                   </p>
                   <p className="list-group-item m-0">
                     Lead Source: {leadData.source}
@@ -126,7 +130,12 @@ export default function LeadManagement() {
                     Time to Close: {leadData.timeToClose}
                   </p>
                 </div>
-                <Link className="btn btn-dark">Edit Lead Details</Link>
+                <Link
+                  to={`/leads/${leadData._id}/edit`}
+                  className="btn btn-dark"
+                >
+                  Edit Lead Details
+                </Link>
               </>
             )
           )}
@@ -147,7 +156,11 @@ export default function LeadManagement() {
                     <div className="card-body">
                       <span>
                         <small className="text-secondary fs-small">
-                          {commentObj.author.name}
+                          {commentObj.author ? (
+                            commentObj.author.name
+                          ) : (
+                            <span className="text-danger">Unknown</span>
+                          )}
                         </small>
                         <small className="text-secondary fs-small ms-2">
                           {new Date(commentObj.createdAt).toDateString()}

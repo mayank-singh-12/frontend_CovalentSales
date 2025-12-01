@@ -13,6 +13,8 @@ import TimeToCloseSort from "../components/sorts/TimeToCloseSort";
 import PageHeading from "../components/general/PageHeading";
 import SideBar from "../components/general/SideBar";
 
+import Leads from "../components/general/Leads";
+
 export default function LeadsByStatus() {
   const { sortedLeads, leadsLoading, leadsErr } = useLeads();
 
@@ -28,14 +30,15 @@ export default function LeadsByStatus() {
           onClick={() => setShow(false)}
           to="/"
         >
-          <i class="bi bi-card-list mx-2"></i>
+          <i className="bi bi-card-list mx-2"></i>
           Dashboard
         </Link>
       </SideBar>
+      
       <main className="container custom-container my-3">
         <PageHeading>Status: {status}</PageHeading>
 
-        <div className="card grow-list-card overflow-auto my-3">
+        {/* <div className="card grow-list-card overflow-auto my-3">
           <div className="card-body ">
             {leadsLoading ? (
               <p>Loading...</p>
@@ -52,7 +55,12 @@ export default function LeadsByStatus() {
                           <div className="col-12 col-sm-6">
                             <p className="mb-2 m-sm-0">Name: {lead.name}</p>
                             <p className="mb-2 m-sm-0">
-                              Sales Agent: {lead.salesAgent.name}
+                              Sales Agent:{" "}
+                              {lead.salesAgent ? (
+                                lead.salesAgent.name
+                              ) : (
+                                <span className="text-danger">None</span>
+                              )}
                             </p>
                           </div>
                           <div className="col-12 col-sm-6">
@@ -73,7 +81,9 @@ export default function LeadsByStatus() {
               leadsErr && <p>{leadsErr}</p>
             )}
           </div>
-        </div>
+        </div> */}
+
+        <Leads/>
 
         <div className="row g-3">
           <div className="col-12 col-sm-6">

@@ -7,7 +7,7 @@ export default function PrioritySort() {
     <>
       <label htmlFor="">Priority:</label>
       <br />
-      <div class="form-check">
+      <div className="form-check">
         <input
           className="form-check-input"
           type="radio"
@@ -16,7 +16,7 @@ export default function PrioritySort() {
           onChange={() => setPrioritySort("asc")}
           checked={prioritySort === "asc"}
         />{" "}
-        <label className="form-check-label" for="priorityLTHSort">
+        <label className="form-check-label" htmlFor="priorityLTHSort">
           Low to High
         </label>
         <br />
@@ -28,7 +28,7 @@ export default function PrioritySort() {
           onChange={() => setPrioritySort("desc")}
           checked={prioritySort === "desc"}
         />{" "}
-        <label className="form-check-label" for="priorityHTLSort">
+        <label className="form-check-label" htmlFor="priorityHTLSort">
           High to Low
         </label>
       </div>

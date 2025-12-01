@@ -6,8 +6,10 @@ import PageHeading from "../components/general/PageHeading";
 
 import SideBar from "../components/general/SideBar";
 
+import Leads from "../components/general/Leads";
+
 export default function Dashboard() {
-  const { leads, leadsLoading, leadsErr, leadsByStatus, setStatusFilter } =
+  const { leads, leadsLoading, leadsErr, leadsByStatus } =
     useLeads();
 
   return (
@@ -36,7 +38,7 @@ export default function Dashboard() {
           onClick={() => setShow(false)}
           to="/reports"
         >
-          <i class="bi bi-pie-chart-fill  mx-2"></i>
+          <i className="bi bi-pie-chart-fill  mx-2"></i>
           Reports
         </Link>
 
@@ -45,7 +47,7 @@ export default function Dashboard() {
           onClick={() => setShow(false)}
           to="/settings"
         >
-          <i class="bi bi-gear-wide-connected mx-2"></i>
+          <i className="bi bi-gear-wide-connected mx-2"></i>
           Settings
         </Link>
       </SideBar>
@@ -54,14 +56,14 @@ export default function Dashboard() {
         <PageHeading>Dashboard</PageHeading>
 
         {/* leads */}
-        <div className="card grow-list-card overflow-auto my-3">
+        {/* <div className="card grow-list-card overflow-auto my-3">
           <div className="card-body ">
             {leadsLoading ? (
               <p>Loading...</p>
             ) : leads.length > 0 ? (
               <div>
                 {leads.map((lead) => (
-                  <div className="card lead-card mb-2" key={lead._id}>
+                  <div className="card record-card mb-2" key={lead._id}>
                     <div className="card-body">
                       <Link
                         className="text-decoration-none text-dark"
@@ -71,7 +73,12 @@ export default function Dashboard() {
                           <div className="col-12 col-sm-6">
                             <p className="mb-2 m-sm-0">Name: {lead.name}</p>
                             <p className="mb-2 m-sm-0">
-                              Sales Agent: {lead.salesAgent.name}
+                              Sales Agent:{" "}
+                              {lead.salesAgent ? (
+                                lead.salesAgent.name
+                              ) : (
+                                <span className="text-danger">None</span>
+                              )}
                             </p>
                           </div>
                           <div className="col-12 col-sm-6">
@@ -92,8 +99,11 @@ export default function Dashboard() {
               leadsErr && <p>{leadsErr}</p>
             )}
           </div>
-        </div>
+        </div> */}
 
+        <Leads/>
+
+        {/* leads grouped by status */}
         <h3 className="text-center">Leads by Status</h3>
         {leadsLoading ? (
           <p>Loading...</p>
@@ -101,7 +111,7 @@ export default function Dashboard() {
           <div className="row">
             {Object.keys(leadsByStatus).map((status) => (
               <div
-                className="col-6 col-sm-3 d-flex justify-content-center g-2"
+                className="col-6 col-md-3 d-flex justify-content-center g-2"
                 key={status}
               >
                 <Link

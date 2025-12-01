@@ -16,6 +16,11 @@ export function LeadsProvider({ children }) {
   const [leadsLoading, setLeadsLoading] = useState(true);
   const [leadsErr, setLeadsErr] = useState(null);
 
+  // single lead var's
+  const [lead, setLead] = useState("");
+  const [leadLoading, setLeadLoading] = useState(true);
+  const [leadErr, setLeadErr] = useState(null);
+
   // extracting values from params
   const paramStatus = searchParams.get("status") || "";
   const paramSalesAgent = searchParams.get("agent") || "";
@@ -76,6 +81,22 @@ export function LeadsProvider({ children }) {
       setLeadsErr(err.response.data.error);
     } finally {
       setLeadsLoading(false);
+    }
+  }
+
+  async function fetchSingleLead(leadId) {
+    try {
+      setLead("");
+      setLeadLoading(true);
+      const response = await axios.get(
+        `https://backend-covalent-sales.vercel.app/leads/${leadId}`
+      );
+      setLead(response.data);
+      setLeadErr(null);
+    } catch (err) {
+      setLeadErr(err.response.data.error);
+    } finally {
+      setLeadLoading(false);
     }
   }
 
@@ -141,6 +162,11 @@ export function LeadsProvider({ children }) {
         // leads grouped by status
         leadsByStatus: leadsByStatus,
 
+        // single lead
+        lead: lead,
+        leadLoading: leadLoading,
+        leadErr: leadErr,
+
         // filters
         statusFilter: statusFilter,
         salesAgentFilter: salesAgentFilter,
@@ -162,6 +188,10 @@ export function LeadsProvider({ children }) {
 
         fetchLeads: fetchLeads,
         multiSort: multiSort,
+
+        fetchSingleLead: fetchSingleLead,
+        
+        setLeadLoading: setLeadLoading,
       }}
     >
       {children}

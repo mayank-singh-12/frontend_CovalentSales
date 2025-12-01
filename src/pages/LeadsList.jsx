@@ -24,22 +24,18 @@ export default function LeadsList() {
 
   return (
     <>
-      <Header />
+      <SideBar>
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/"
+        >
+          <i className="bi bi-card-list mx-2"></i>
+          Dashboard
+        </Link>
+      </SideBar>
+
       <main className="container custom-container my-3">
-        {/* sidebar */}
-        <SideBar>
-
-          <Link
-            className="p-2 text-dark text-decoration-none sidebar-link"
-            onClick={() => setShow(false)}
-            to="/"
-          >
-            <i class="bi bi-card-list mx-2"></i>
-            Dashboard
-          </Link>
-
-        </SideBar>
-
         <PageHeading>Leads List</PageHeading>
 
         {/* leads */}
@@ -60,7 +56,7 @@ export default function LeadsList() {
                           <div className="col-12 col-sm-6">
                             <p className="mb-2 m-sm-0">Name: {lead.name}</p>
                             <p className="mb-2 m-sm-0">
-                              Sales Agent: {lead.salesAgent.name}
+                              Sales Agent: {lead.salesAgent ? lead.salesAgent.name : <span className="text-danger">None</span>}
                             </p>
                           </div>
                           <div className="col-12 col-sm-6">

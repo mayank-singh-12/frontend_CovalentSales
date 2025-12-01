@@ -16,9 +16,11 @@ import LeadsList from "./pages/LeadsList";
 import LeadManagement from "./pages/LeadManagement";
 import LeadsByStatus from "./pages/LeadsByStatus";
 import LeadsBySalesAgents from "./pages/LeadsBySalesAgents";
+import LeadEdit from "./pages/LeadEdit";
 import AddNewAgent from "./pages/AddNewAgent";
 import SalesAgentsManagement from "./pages/SalesAgentsManagement";
 import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 
 // PROVIDERS
 import { SalesAgentProvider } from "./contexts/SalesAgentsContext";
@@ -40,7 +42,7 @@ export default function App() {
             <ReportsProvider>
               <CommentsProvider>
                 <SideBarProvider>
-                  <Header/>
+                  <Header />
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
                     <Route path="/agents" element={<SalesAgentsManagement />} />
@@ -48,7 +50,9 @@ export default function App() {
                     <Route path="/leads" element={<LeadsList />} />
                     <Route path="/leads/new" element={<AddNewLead />} />
                     <Route path="/leads/:id" element={<LeadManagement />} />
+                    <Route path="/leads/:id/edit" element={<LeadEdit />} />
                     <Route path="/leads/status" element={<LeadsByStatus />} />
+                    <Route path="/settings" element={<Settings />} />
                     <Route
                       path="/leads/agents"
                       element={<LeadsBySalesAgents />}

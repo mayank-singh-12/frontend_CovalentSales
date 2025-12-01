@@ -2,15 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Header from "../components/general/Header";
 import useSalesAgent from "../contexts/SalesAgentsContext";
 import { Link } from "react-router-dom";
+import PageHeading from "../components/general/PageHeading";
+import SideBar from "../components/general/SideBar";
 
 export default function AddNewAgent() {
   const navigate = useNavigate();
-
-  // const { setSalesAgents, setSalesAgentsLoading, setSalesAgentsErr } =
-  //   useSalesAgent();
 
   const { fetchAgents } = useSalesAgent();
 
@@ -47,16 +45,18 @@ export default function AddNewAgent() {
   }
   return (
     <>
-      <Header />
-      <main className="container overflow-hidden">
-        <Link className="text-decoration-none" to="/agents">
-          {" "}
-          <span>
-            {" "}
-            <i class="bi bi-arrow-left-square"></i>{" "}
-          </span>{" "}
+      <SideBar>
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/agents"
+        >
+          <i className="bi bi bi-people-fill mx-2"></i>
           Sales Agents
         </Link>
+      </SideBar>
+      <main className="container overflow-hidden my-3">
+        <PageHeading> </PageHeading>
 
         <div className="inner-container d-flex justify-content-center align-items-center ">
           {loading ? (

@@ -127,6 +127,10 @@ input:focus {
   width: 280px;
 }
 
+.bar-chart {
+  width: 280px;
+}
+
 /* navbar */
 .nav-bg {
   background-color: #36a2eb;
@@ -137,4 +141,7 @@ input:focus {
     border: 1px solid gray;
     min-width: 400px;
   }
+  .bar-chart {
+  width: 520px;
+}
 }

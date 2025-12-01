@@ -65,7 +65,7 @@ export default function AddNewLead() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/leads",
+        "https://backend-covalent-sales.vercel.app/leads",
         newLeadData
       );
       toast.success("New Lead Added!");
@@ -78,28 +78,26 @@ export default function AddNewLead() {
 
   return (
     <>
-      <Header />
+      <SideBar>
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/leads"
+        >
+          <i className="bi bi-person-lines-fill mx-2"></i>
+          Leads
+        </Link>
+
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/"
+        >
+          <i className="bi bi-card-list mx-2"></i>
+          Dashboard
+        </Link>
+      </SideBar>
       <main className="container custom-container my-3">
-        <SideBar>
-          <Link
-            className="p-2 text-dark text-decoration-none sidebar-link"
-            onClick={() => setShow(false)}
-            to="/leads"
-          >
-            <i className="bi bi-person-lines-fill mx-2"></i>
-            Leads
-          </Link>
-
-          <Link
-            className="p-2 text-dark text-decoration-none sidebar-link"
-            onClick={() => setShow(false)}
-            to="/"
-          >
-            <i class="bi bi-card-list mx-2"></i>
-            Dashboard
-          </Link>
-        </SideBar>
-
         <PageHeading>Add New Lead</PageHeading>
 
         <div className="card mt-3">

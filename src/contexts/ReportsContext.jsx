@@ -56,8 +56,6 @@ export function ReportsProvider({ children }) {
     fetchLeadsClosedLastWeek();
   }, []);
 
-  console.log(leadsInPipeline);
-
   return (
     <ReportsContext.Provider
       value={{

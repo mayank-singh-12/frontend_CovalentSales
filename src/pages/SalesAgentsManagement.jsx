@@ -10,19 +10,18 @@ export default function SalesAgentsManagement() {
 
   return (
     <>
-      <Header />
-      <main className="container custom-container my-3">
-        <SideBar>
-          <Link
-            className="p-2 text-dark text-decoration-none sidebar-link"
-            onClick={() => setShow(false)}
-            to="/"
-          >
-            <i class="bi bi-card-list mx-2"></i>
-            Dashboard
-          </Link>
-        </SideBar>
+      <SideBar>
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/"
+        >
+          <i className="bi bi-card-list mx-2"></i>
+          Dashboard
+        </Link>
+      </SideBar>
 
+      <main className="container custom-container my-3">
         <PageHeading>Sales Agents List</PageHeading>
 
         <div className="card list-card mt-3">

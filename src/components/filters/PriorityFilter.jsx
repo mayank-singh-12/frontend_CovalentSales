@@ -5,8 +5,8 @@ export default function PriorityFilter() {
 
   return (
     <div>
-      <label className="form-label" htmlFor="priorityFilter">
-        Priority:
+      <label className="form-label m-0" htmlFor="priorityFilter">
+        Priority
       </label>
       <select
         className="form-select"

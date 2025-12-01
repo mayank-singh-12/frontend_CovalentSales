@@ -15,7 +15,8 @@ import { Link } from "react-router-dom";
 import useReports from "../contexts/ReportsContext";
 import useLeads from "../contexts/LeadsContext";
 
-import Header from "../components/general/Header";
+import PageHeading from "../components/general/PageHeading";
+import SideBar from "../components/general/SideBar";
 
 ChartJS.register(
   ArcElement,
@@ -56,18 +57,28 @@ export default function Reports() {
 
   // Bar chart config for leads closed by sales agents
   const closedLeadsByAgents = leads.reduce((acc, curr) => {
-    if (curr.status === "Closed" && !acc[curr.salesAgent._id]) {
-      acc[curr.salesAgent._id] = [];
-    }
+    // filtering closed leads
     if (curr.status === "Closed") {
-      acc[curr.salesAgent._id].push(curr);
+      // generating empty arrays
+      if (curr.salesAgent && !acc[curr.salesAgent._id]) {
+        acc[curr.salesAgent._id] = [];
+      } else if (!acc["Unknown"]) {
+        acc["Unknown"] = [];
+      }
+
+      // pushing leads arrays
+      if (!curr.salesAgent) {
+        acc["Unknown"].push(curr);
+      } else {
+        acc[curr.salesAgent._id].push(curr);
+      }
     }
     return acc;
   }, {});
 
   // agentsNames for label
   const agentsNames = leads.reduce((acc, curr) => {
-    const agentName = curr.salesAgent.name;
+    const agentName = curr.salesAgent ? curr.salesAgent.name : "Unknown";
     if (curr.status === "Closed" && !acc.includes(agentName)) {
       acc.push(agentName);
     }
@@ -108,63 +119,86 @@ export default function Reports() {
 
   return (
     <>
-      <Header/>
-      <main className="container custom-container mb-3">
-        <Link className="text-decoration-none" to="/">
-          {" "}
-          <span>
-            {" "}
-            <i class="bi bi-arrow-left-square"></i>{" "}
-          </span>{" "}
+      <SideBar>
+        <Link
+          className="p-2 text-dark text-decoration-none sidebar-link"
+          onClick={() => setShow(false)}
+          to="/"
+        >
+          <i className="bi bi-card-list mx-2"></i>
           Dashboard
         </Link>
-        <h3 className="text-center">Report Overview</h3>
-        <hr />
-        <p className="text-center fw-bold">
-          Total Leads closed and in Pipeline
-        </p>
-        {leadsInPipelineLoading || leadsClosedLastWeekLoading ? (
-          <p>Loading...</p>
-        ) : leadsClosedLastWeek.length > 0 && leadsInPipeline > 0 ? (
-          <div className="d-flex justify-content-center">
-            <div className="chart">
-              <Pie data={dataForLeadsSummary} options={options} />
-            </div>
-          </div>
-        ) : (
-          <>
-            {leadsInPipelineErr && <p>{leadsInPipelineErr}</p>}
-            {leadsClosedLastWeekErr && <p>{leadsClosedLastWeekErr}</p>}
-          </>
-        )}
+      </SideBar>
 
-        <hr />
-        <p className="text-center fw-bold">Leads Closed by Sales Agent</p>
-        {leadsLoading ? (
-          <p>Loading...</p>
-        ) : leads.length > 0 ? (
-          <div className="d-flex justify-content-center">
-            <div className="chart">
-              <Bar data={dataForClosedLeadsByAgents} options={options} />
-            </div>
-          </div>
-        ) : (
-          <>{leadsErr && <p>{leadsErr}</p>}</>
-        )}
+      <main className="container custom-container my-3">
+        <PageHeading>Report Overview</PageHeading>
 
-        <hr />
-        <p className="text-center fw-bold">Leads Status Distribution </p>
-        {leadsLoading ? (
-          <p>Loading...</p>
-        ) : leads.length > 0 ? (
-          <div className="d-flex justify-content-center">
-            <div className="chart">
-              <Pie data={dataForLeadsDistribution} options={options} />
+        <div className="mt-3">
+          <div className="row g-0">
+            <div className="card corner-sharp col-md-6 col-12">
+              <div className="card-body">
+                <p className="text-center fw-bold">
+                  Total Leads closed and in Pipeline
+                </p>
+                {leadsInPipelineLoading || leadsClosedLastWeekLoading ? (
+                  <p>Loading...</p>
+                ) : leadsClosedLastWeek.length > 0 && leadsInPipeline > 0 ? (
+                  <div className="d-flex justify-content-center">
+                    <div className="chart">
+                      <Pie data={dataForLeadsSummary} options={options} />
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {leadsInPipelineErr && <p>{leadsInPipelineErr}</p>}
+                    {leadsClosedLastWeekErr && <p>{leadsClosedLastWeekErr}</p>}
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className="card corner-sharp col-md-6 col-12">
+              <div className="card-body">
+                <p className="text-center fw-bold">
+                  Leads Closed by Sales Agent
+                </p>
+                {leadsLoading ? (
+                  <p>Loading...</p>
+                ) : leads.length > 0 ? (
+                  <div className="d-flex justify-content-center">
+                    <div className="bar-chart d-flex justify-content-center">
+                      <Bar
+                        data={dataForClosedLeadsByAgents}
+                        options={options}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <>{leadsErr && <p>{leadsErr}</p>}</>
+                )}
+              </div>
+            </div>
+
+            <div className="card corner-sharp col-md-6 col-12">
+              <div className="card-body">
+                <p className="text-center fw-bold">
+                  Leads Status Distribution{" "}
+                </p>
+                {leadsLoading ? (
+                  <p>Loading...</p>
+                ) : leads.length > 0 ? (
+                  <div className="d-flex justify-content-center">
+                    <div className="chart">
+                      <Pie data={dataForLeadsDistribution} options={options} />
+                    </div>
+                  </div>
+                ) : (
+                  <>{leadsErr && <p>{leadsErr}</p>}</>
+                )}
+              </div>
             </div>
           </div>
-        ) : (
-          <>{leadsErr && <p>{leadsErr}</p>}</>
-        )}
+        </div>
       </main>
     </>
   );

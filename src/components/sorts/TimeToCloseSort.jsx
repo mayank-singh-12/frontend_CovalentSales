@@ -15,7 +15,7 @@ export default function TimeToCloseSort() {
         onChange={() => setTimeToCloseSort("asc")}
         checked={timeToCloseSort === "asc"}
       />{" "}
-      <label className="form-check-label" for="timeToCloseLTHSort">
+      <label className="form-check-label" htmlFor="timeToCloseLTHSort">
         Low to High
       </label>
       <br />
@@ -27,7 +27,7 @@ export default function TimeToCloseSort() {
         onChange={() => setTimeToCloseSort("desc")}
         checked={timeToCloseSort === "desc"}
       />{" "}
-      <label className="form-check-label" for="timeToCloseHTLSort">
+      <label className="form-check-label" htmlFor="timeToCloseHTLSort">
         High to Low
       </label>
     </>
