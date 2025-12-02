@@ -1,16 +1,9 @@
-# React + Vite
+# Covalent Sales
+Welcome to the Customer Resource Management Platform Project built using MERN ( MongoDB, Express.js, React, Node.js ) Stack. This project provides a full-featured and robust online customer resource management system with various functionalities.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live App : https://frontent-covalent-sales.vercel.app/
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+### Dashboard
+  - Dashboard which showcase all the leads, leads count by status and a filter leads dropdown to filter leads by their status.
+  - Leads list page which shows all the leads along with multiple filters (filter by status and filter by Sales Agent) and multi-sort (sort by p)
