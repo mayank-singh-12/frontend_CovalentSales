@@ -11,6 +11,8 @@ import StatusFilter from "../components/filters/StatusFilter";
 import PrioritySort from "../components/sorts/PrioritySort";
 import TimeToCloseSort from "../components/sorts/TimeToCloseSort";
 
+import Leads from "../components/general/Leads";
+
 export default function LeadsList() {
   // reading from leads context
   const {
@@ -39,7 +41,7 @@ export default function LeadsList() {
         <PageHeading>Leads List</PageHeading>
 
         {/* leads */}
-        <div className="card grow-list-card overflow-auto my-3">
+        {/* <div className="card grow-list-card overflow-auto my-3">
           <div className="card-body ">
             {leadsLoading ? (
               <p>Loading...</p>
@@ -77,7 +79,9 @@ export default function LeadsList() {
               leadsErr && <p>{leadsErr}</p>
             )}
           </div>
-        </div>
+        </div> */}
+
+        <Leads/>
 
         <div className="row mb-3">
           {/* filters */}

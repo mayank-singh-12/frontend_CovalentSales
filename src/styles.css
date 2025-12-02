@@ -79,7 +79,6 @@ input:focus {
 
 .record-card {
   background-color: var(--bg-light-grey) !important;
-  /* border: solid 1px var(--bg-blue) !important; */
 }
 
 .comment-card {
@@ -117,10 +116,8 @@ input:focus {
 }
 
 /* Reports */
-
 .custom-container {
   height: 100% !important;
-  /* max-width: 100% !important; */
 }
 
 .chart {
@@ -142,6 +139,6 @@ input:focus {
     min-width: 400px;
   }
   .bar-chart {
-  width: 520px;
-}
+    width: 520px;
+  }
 }
