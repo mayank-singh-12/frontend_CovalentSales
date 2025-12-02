@@ -26,7 +26,7 @@ export default function Leads() {
                           {lead.salesAgent ? (
                             lead.salesAgent.name
                           ) : (
-                            <span className="text-danger">None</span>
+                            <span className="text-danger">Unknown</span>
                           )}
                         </p>
                       </div>
