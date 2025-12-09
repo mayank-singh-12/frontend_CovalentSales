@@ -44,8 +44,6 @@ Watch a walkthrough (5 minutes 45 seconds) to walk through major features of thi
 ---
 
 ## Features
-<<<<<<< HEAD
-
 **Side Bar**
 
 - Provides Side bar to navigate between different pages.
