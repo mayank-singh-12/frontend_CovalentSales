@@ -1,7 +1,6 @@
 import useLeads from "../contexts/LeadsContext";
 import { Link } from "react-router-dom";
 
-import Header from "../components/general/Header";
 import PageHeading from "../components/general/PageHeading";
 import SideBar from "../components/general/SideBar";
 
@@ -81,7 +80,7 @@ export default function LeadsList() {
           </div>
         </div> */}
 
-        <Leads/>
+        <Leads />
 
         <div className="row mb-3">
           {/* filters */}

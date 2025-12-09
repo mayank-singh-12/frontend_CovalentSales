@@ -5,7 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Select from "react-select";
 
-import Header from "../components/general/Header";
 import PageHeading from "../components/general/PageHeading";
 import SideBar from "../components/general/SideBar";
 

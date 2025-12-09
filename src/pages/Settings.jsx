@@ -93,11 +93,11 @@ export default function Settings() {
                                 <p className="mb-2 m-sm-0">Name: {lead.name}</p>
                                 <p className="mb-2 m-sm-0">
                                   Sales Agent:{" "}
-                              {lead.salesAgent ? (
-                                lead.salesAgent.name
-                              ) : (
-                                <span className="text-danger">None</span>
-                              )}
+                                  {lead.salesAgent ? (
+                                    lead.salesAgent.name
+                                  ) : (
+                                    <span className="text-danger">None</span>
+                                  )}
                                 </p>
                               </div>
                               <div className="col-12 col-sm-6">
